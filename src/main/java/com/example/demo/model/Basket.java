@@ -15,6 +15,7 @@ public class Basket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "basket_id")
     private Long id;
 
     @Column(nullable = false)
@@ -22,7 +23,11 @@ public class Basket {
     private boolean paid;
 
     @ManyToMany
-    @JoinColumn(name = "fk_products")
+    @JoinTable(
+            name="products_in_baskets",
+            joinColumns = @JoinColumn(name="basket_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
     private List<Product> products;
 
     public Basket() {
