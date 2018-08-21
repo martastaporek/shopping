@@ -18,9 +18,7 @@ public class Basket {
     @Column(name = "basket_id")
     private Long id;
 
-    @Column(nullable = false)
-    @Type(type = "org.hibernate.type.NumericBoolean")
-    private boolean paid;
+    private boolean paid = false;
 
     @ManyToMany
     @JoinTable(

@@ -18,7 +18,7 @@ public class Customer implements Serializable {
 
     private String name;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Basket> baskets;
 
     public Customer() {
