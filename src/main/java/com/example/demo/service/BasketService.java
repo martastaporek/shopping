@@ -3,11 +3,13 @@ package com.example.demo.service;
 import com.example.demo.model.Basket;
 import com.example.demo.repository.BasketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.Collection;
 import java.util.Optional;
 
 @org.springframework.stereotype.Service
+@Qualifier("basketService")
 public class BasketService implements Service <Basket> {
 
     private BasketRepository basketRepository;
