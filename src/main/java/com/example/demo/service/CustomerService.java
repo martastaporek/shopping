@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Collection;
 import java.util.Optional;
 
+@org.springframework.stereotype.Service
 public class CustomerService implements Service <Customer> {
 
     private CustomerRepository customerRepository;
