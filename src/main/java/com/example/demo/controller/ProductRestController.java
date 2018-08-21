@@ -1,17 +1,16 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Product;
 import com.example.demo.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 public class ProductRestController {
@@ -27,6 +26,15 @@ public class ProductRestController {
     @GetMapping(value = "/products", produces = "application/json")
     public Collection<Product> getAllProducts() {
         return productService.findAll();
+    }
+
+    @GetMapping(value = "/products/{productId}")
+    public Product getProductById(@PathVariable Long productId) {
+        Optional<Product> product = productService.findById(productId);
+        if(product.isPresent()) {
+            return product.get();
+        }
+        throw new ResourceNotFoundException("Product", "id", productId);
     }
 
 
