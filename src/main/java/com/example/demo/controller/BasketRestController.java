@@ -6,9 +6,9 @@ import com.example.demo.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -50,5 +50,12 @@ public class BasketRestController {
             throw new ResourceNotFoundException("Basket", "id", basketId);
         }
         return basket.get();
+    }
+
+    @PostMapping(value = "/baskets", consumes = "application/json")
+    public ResponseEntity<Basket> createBasket(@RequestBody Basket basket) {
+        basketService.save(basket);
+
+        return new ResponseEntity<>(basket, HttpStatus.OK);
     }
 }
