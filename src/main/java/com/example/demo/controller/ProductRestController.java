@@ -36,7 +36,7 @@ public class ProductRestController {
             params = {"page", "size"},
             produces = "application/json"
     )
-    public List<Product> getPaginatedProducts(@RequestParam("page") int page, @RequestParam("size") int size) {
+    public Collection<Product> getPaginatedProducts(@RequestParam("page") int page, @RequestParam("size") int size) {
         Page<Product> resultPage = productService.findPaginated(page, size);
         if(page > resultPage.getTotalPages()) {
             throw new ResourceNotFoundException("Product", "page", page);

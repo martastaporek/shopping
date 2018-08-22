@@ -5,11 +5,13 @@ import com.example.demo.model.Basket;
 import com.example.demo.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -28,6 +30,19 @@ public class BasketRestController {
         return basketService.findAll();
     }
 
+    //getting baskets by pagination
+    @GetMapping(
+            value = "/baskets",
+            params = {"page", "size"},
+            produces = "application/json"
+    )
+    public Collection<Basket> getPaginatedBaskets(@PathVariable("page") int page, @PathVariable("size") int size) {
+        Page<Basket> resultPage = basketService.findPaginated(page, size);
+        if (page > resultPage.getTotalPages()) {
+            throw new ResourceNotFoundException("Basket", "page", page);
+        }
+        return resultPage.getContent();
+    }
     @GetMapping(value = "/baskets/{basketid}", produces = "application/json")
     public Basket getBasketById(@PathVariable(value = "basketId") Long basketId) {
         Optional<Basket> basket = basketService.findById(basketId);
