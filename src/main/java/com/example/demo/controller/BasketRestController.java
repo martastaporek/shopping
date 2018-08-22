@@ -36,7 +36,7 @@ public class BasketRestController {
             params = {"page", "size"},
             produces = "application/json"
     )
-    public Collection<Basket> getPaginatedBaskets(@PathVariable("page") int page, @PathVariable("size") int size) {
+    public Collection<Basket> getPaginatedBaskets(@RequestParam("page") int page, @RequestParam("size") int size) {
         Page<Basket> resultPage = basketService.findPaginated(page, size);
         if (page > resultPage.getTotalPages()) {
             throw new ResourceNotFoundException("Basket", "page", page);
