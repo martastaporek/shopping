@@ -51,11 +51,21 @@ public class ProductRestController {
         throw new ResourceNotFoundException("Product", "id", productId);
     }
 
-
     @PostMapping(value = "/products")
     public ResponseEntity createProduct(@RequestBody Product product) {
         productService.save(product);
 
         return new ResponseEntity(product, HttpStatus.OK);
+    }
+
+    @PutMapping("/products/{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable(value = "id") Long productId, @RequestBody Product requestProduct) {
+       Optional<Product> product = productService.findById(productId);
+       if(!product.isPresent()) {
+           throw new ResourceNotFoundException("Product", "id", productId);
+       }
+       requestProduct.setId(product.get().getId());
+       productService.save(requestProduct);
+       return ResponseEntity.noContent().build();
     }
 }
