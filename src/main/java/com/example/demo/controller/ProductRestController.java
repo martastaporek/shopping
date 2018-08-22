@@ -44,12 +44,12 @@ public class ProductRestController {
         return resultPage.getContent();
     }
     @GetMapping(value = "/products/{productId}", produces = "application/json")
-    public Product getProductById(@PathVariable Long productId) {
+    public Product getProductById(@PathVariable (value="productId") Long productId) {
         Optional<Product> product = productService.findById(productId);
-        if(product.isPresent()) {
-            return product.get();
+        if(!product.isPresent()) {
+            throw new ResourceNotFoundException("Product", "id", productId);
         }
-        throw new ResourceNotFoundException("Product", "id", productId);
+        return product.get();
     }
 
     @PostMapping(value = "/products")
@@ -59,8 +59,8 @@ public class ProductRestController {
         return new ResponseEntity(product, HttpStatus.OK);
     }
 
-    @PutMapping("/products/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable(value = "id") Long productId, @RequestBody Product requestProduct) {
+    @PutMapping("/products/{productId}")
+    public ResponseEntity<?> updateProduct(@PathVariable(value = "productId") Long productId, @RequestBody Product requestProduct) {
        Optional<Product> product = productService.findById(productId);
        if(!product.isPresent()) {
            throw new ResourceNotFoundException("Product", "id", productId);
