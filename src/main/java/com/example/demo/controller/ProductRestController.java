@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -52,15 +51,15 @@ public class ProductRestController {
         return product.get();
     }
 
-    @PostMapping(value = "/products")
-    public ResponseEntity createProduct(@RequestBody Product product) {
+    @PostMapping(value = "/products", consumes = "application/json")
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         productService.save(product);
 
-        return new ResponseEntity(product, HttpStatus.OK);
+        return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    @PutMapping("/products/{productId}")
-    public ResponseEntity<?> updateProduct(@PathVariable(value = "productId") Long productId, @RequestBody Product requestProduct) {
+    @PutMapping(value = "/products/{productId}", consumes = "application/json")
+    public ResponseEntity<Void> updateProduct(@PathVariable(value = "productId") Long productId, @RequestBody Product requestProduct) {
        Optional<Product> product = productService.findById(productId);
        if(!product.isPresent()) {
            throw new ResourceNotFoundException("Product", "id", productId);
