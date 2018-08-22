@@ -32,7 +32,7 @@ public class ProductRestController {
 
     // getting products with pagination
     @GetMapping(
-            value = "products",
+            value = "/products",
             params = {"page", "size"},
             produces = "application/json"
     )
