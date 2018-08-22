@@ -67,6 +67,7 @@ public class BasketRestController {
         }
 
         requestBasket.setId(basket.get().getId());
+        basketService.save(requestBasket);
         return ResponseEntity.noContent().build();
     }
 
