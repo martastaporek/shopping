@@ -58,4 +58,15 @@ public class BasketRestController {
 
         return new ResponseEntity<>(basket, HttpStatus.OK);
     }
+
+    @PutMapping(value = "?/baskets/{basketId}", consumes = "application/json")
+    public ResponseEntity<Void> updateBasket(@PathVariable(value = "basketId") Long basketId, @RequestBody Basket requestBasket) {
+        Optional<Basket> basket = basketService.findById(basketId);
+        if(!basket.isPresent()) {
+            throw new ResourceNotFoundException("Basket", "id", basketId);
+        }
+
+        requestBasket.setId(basket.get().getId());
+        return ResponseEntity.noContent().build();
+    }
 }
