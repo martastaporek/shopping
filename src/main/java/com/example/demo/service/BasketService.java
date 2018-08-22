@@ -4,6 +4,8 @@ import com.example.demo.model.Basket;
 import com.example.demo.repository.BasketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -38,5 +40,10 @@ public class BasketService implements Service <Basket> {
     @Override
     public void delete(Basket basket) {
         basketRepository.delete(basket);
+    }
+
+    @Override
+    public Page<Basket> findPaginated(int page, int size) {
+        return basketRepository.findAll(PageRequest.of(page, size));
     }
 }

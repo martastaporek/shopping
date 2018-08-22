@@ -4,6 +4,8 @@ import com.example.demo.model.Customer;
 import com.example.demo.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -37,5 +39,10 @@ public class CustomerService implements Service <Customer> {
     @Override
     public void delete(Customer customer) {
         customerRepository.delete(customer);
+    }
+
+    @Override
+    public Page<Customer> findPaginated(int page, int size) {
+        return customerRepository.findAll(PageRequest.of(page, size));
     }
 }
