@@ -6,6 +6,7 @@ import com.example.demo.model.Customer;
 import com.example.demo.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,19 @@ public class CustomerRestController {
     @GetMapping(value ="/customers", produces = "application/json")
     public Collection<Customer> getAllCustomers(){
         return customerService.findAll();
+    }
+
+    @GetMapping(
+            value = "/customers",
+            params = {"page", "size"},
+            produces = "application/json"
+    )
+    public Collection<Customer> getPaginatedBaskets(@PathVariable("page") int page, @PathVariable("size") int size) {
+        Page<Customer> resultPage = customerService.findPaginated(page, size);
+        if (page > resultPage.getTotalPages()) {
+            throw new ResourceNotFoundException("Customer", "page", page);
+        }
+        return resultPage.getContent();
     }
 
     @GetMapping(value = "customers/{customerId}", produces = "application/json")
