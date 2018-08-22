@@ -33,7 +33,8 @@ public class ProductRestController {
     // getting products with pagination
     @GetMapping(
             value = "products",
-            params = {"page", "size"}
+            params = {"page", "size"},
+            produces = "application/json"
     )
     public List<Product> getPaginatedProducts(@RequestParam("page") int page, @RequestParam("size") int size) {
         Page<Product> resultPage = productService.findPaginated(page, size);
@@ -42,7 +43,7 @@ public class ProductRestController {
         }
         return resultPage.getContent();
     }
-    @GetMapping(value = "/products/{productId}")
+    @GetMapping(value = "/products/{productId}", produces = "application/json")
     public Product getProductById(@PathVariable Long productId) {
         Optional<Product> product = productService.findById(productId);
         if(product.isPresent()) {
