@@ -5,11 +5,13 @@ import com.example.demo.model.Product;
 import com.example.demo.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -28,6 +30,18 @@ public class ProductRestController {
         return productService.findAll();
     }
 
+    // getting products with pagination
+    @GetMapping(
+            value = "products",
+            params = {"page", "size"}
+    )
+    public List<Product> getPaginatedProducts(@RequestParam("page") int page, @RequestParam("size") int size) {
+        Page<Product> resultPage = productService.findPaginated(page, size);
+        if(page > resultPage.getTotalPages()) {
+            throw new ResourceNotFoundException("Product", "page", page);
+        }
+        return resultPage.getContent();
+    }
     @GetMapping(value = "/products/{productId}")
     public Product getProductById(@PathVariable Long productId) {
         Optional<Product> product = productService.findById(productId);
