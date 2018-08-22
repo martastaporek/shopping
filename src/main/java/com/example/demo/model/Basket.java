@@ -19,7 +19,7 @@ public class Basket {
 
     private boolean paid = false;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name="products_in_baskets",
             joinColumns = @JoinColumn(name="basket_id"),
