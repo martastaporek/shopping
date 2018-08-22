@@ -68,4 +68,14 @@ public class ProductRestController {
        productService.save(requestProduct);
        return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/products/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable(value = "id") Long productId) {
+        Optional<Product> product = productService.findById(productId);
+        if(!product.isPresent()) {
+            throw new ResourceNotFoundException("Product", "id", productId);
+        }
+        productService.delete(product.get());
+        return ResponseEntity.noContent().build();
+    }
 }
