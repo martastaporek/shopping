@@ -23,12 +23,12 @@ public class ProductService implements Service<Product> {
 
     @Override
     public Collection<Product> findAll() {
-        return productRepository.findAll();
+        return productRepository.findAllByAvailableTrue();
     }
 
     @Override
     public Optional<Product> findById(Long id) {
-        return productRepository.findById(id);
+        return productRepository.findByIdAndAvailableTrue(id);
     }
 
     @Override
@@ -38,7 +38,9 @@ public class ProductService implements Service<Product> {
 
     @Override
     public void delete(Product product) {
-        productRepository.delete(product);
+
+        product.setAvailable(false);
+        productRepository.save(product);
     }
 
     @Override
