@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package com.codecool.shop.service;
 
-import com.example.demo.model.Customer;
-import com.example.demo.repository.CustomerRepository;
+import com.codecool.shop.model.Customer;
+import com.codecool.shop.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;

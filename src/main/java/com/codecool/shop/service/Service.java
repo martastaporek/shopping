@@ -1,6 +1,5 @@
-package com.example.demo.service;
+package com.codecool.shop.service;
 
-import com.example.demo.model.Product;
 import org.springframework.data.domain.Page;
 
 import java.util.Collection;

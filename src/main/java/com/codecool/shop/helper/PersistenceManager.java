@@ -1,14 +1,12 @@
-package com.example.demo.helper;
+package com.codecool.shop.helper;
 
-import com.example.demo.model.Basket;
-import com.example.demo.model.Category;
-import com.example.demo.model.Customer;
-import com.example.demo.model.Product;
-import com.example.demo.repository.BasketRepository;
-import com.example.demo.repository.CustomerRepository;
-import com.example.demo.repository.ProductRepository;
-import com.example.demo.service.CustomerService;
-import com.example.demo.service.Service;
+import com.codecool.shop.model.Basket;
+import com.codecool.shop.repository.BasketRepository;
+import com.codecool.shop.model.Category;
+import com.codecool.shop.model.Customer;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.repository.CustomerRepository;
+import com.codecool.shop.repository.ProductRepository;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

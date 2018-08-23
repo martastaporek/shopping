@@ -1,8 +1,8 @@
-package com.example.demo.controller;
+package com.codecool.shop.controller;
 
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.Basket;
-import com.example.demo.service.Service;
+import com.codecool.shop.model.Basket;
+import com.codecool.shop.service.Service;
+import com.codecool.shop.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @RestController

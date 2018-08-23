@@ -1,8 +1,8 @@
-package com.example.demo.controller;
+package com.codecool.shop.controller;
 
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.Product;
-import com.example.demo.service.Service;
+import com.codecool.shop.exception.ResourceNotFoundException;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.service.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
