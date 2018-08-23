@@ -52,7 +52,7 @@ public class PersistenceManager implements CommandLineRunner {
                 products = generateBooks();
 
             }
-            setProductsInBasket(fakeCustomer, products);
+            setProductsInBasket(fakeCustomer);
             this.customerRepository.save(fakeCustomer);
 
 
@@ -60,10 +60,12 @@ public class PersistenceManager implements CommandLineRunner {
 
     }
 
-    private void setProductsInBasket(Customer customer, List <Product> products){
+    private void setProductsInBasket(Customer customer){
 
         Basket fakeBasket = new Basket();
-        fakeBasket.setProducts(products);
+//        fakeBasket.setProducts(products);
+        fakeBasket.setCustomer(customer);
+        //basketRepository.save(fakeBasket);
         List<Basket>baskets = new ArrayList<>();
         baskets.add(fakeBasket);
         customer.setBaskets(baskets);
