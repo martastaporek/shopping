@@ -1,7 +1,9 @@
 package com.codecool.shop.service;
 
 import com.codecool.shop.model.Basket;
+import com.codecool.shop.model.Customer;
 import com.codecool.shop.repository.BasketRepository;
+import com.codecool.shop.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
@@ -15,10 +17,12 @@ import java.util.Optional;
 public class BasketService implements Service <Basket> {
 
     private BasketRepository basketRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
-    public BasketService(BasketRepository basketRepository) {
+    public BasketService(BasketRepository basketRepository, CustomerRepository customerRepository) {
         this.basketRepository = basketRepository;
+        this.customerRepository = customerRepository;
     }
 
 
@@ -39,6 +43,10 @@ public class BasketService implements Service <Basket> {
 
     @Override
     public void delete(Basket basket) {
+
+        Customer customer = basket.getCustomer();
+        customer.getBaskets().remove(basket);
+        customerRepository.save(customer);
         basketRepository.delete(basket);
     }
 

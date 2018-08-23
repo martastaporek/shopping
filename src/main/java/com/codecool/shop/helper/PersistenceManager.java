@@ -44,6 +44,7 @@ public class PersistenceManager implements CommandLineRunner {
         for(int i = 0; i < 10; i++){
             Customer fakeCustomer = new Customer();
             fakeCustomer.setName(faker.gameOfThrones().character());
+            customerRepository.save(fakeCustomer);
             List<Product> products;
             if(i%2==0){
                 products = generateFood();
@@ -60,10 +61,12 @@ public class PersistenceManager implements CommandLineRunner {
 
     }
 
-    private void setProductsInBasket(Customer customer, List <Product> products){
+    private void setProductsInBasket(Customer customer, List<Product> products){
 
         Basket fakeBasket = new Basket();
         fakeBasket.setProducts(products);
+        fakeBasket.setCustomer(customer);
+        basketRepository.save(fakeBasket);
         List<Basket>baskets = new ArrayList<>();
         baskets.add(fakeBasket);
         customer.setBaskets(baskets);

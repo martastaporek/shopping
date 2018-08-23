@@ -27,6 +27,8 @@ public class Product implements Serializable {
     @JsonProperty("category")
     private Category category;
 
+    private boolean available = true;
+
     public Product() {
     }
 }
