@@ -2,7 +2,6 @@ package com.example.demo.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,7 +19,7 @@ public class Basket {
 
     private boolean paid = false;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name="products_in_baskets",
             joinColumns = @JoinColumn(name="basket_id"),
