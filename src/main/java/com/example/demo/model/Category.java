@@ -8,5 +8,6 @@ public enum Category {
     DRINK,
     FOOD,
     ELECTRONICS,
-    FURNITURE
+    FURNITURE,
+    BOOK
 }
