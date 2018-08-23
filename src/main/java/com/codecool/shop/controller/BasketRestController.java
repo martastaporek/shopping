@@ -42,7 +42,7 @@ public class BasketRestController {
         }
         return resultPage.getContent();
     }
-    @GetMapping(value = "/baskets/{basketid}", produces = "application/json")
+    @GetMapping(value = "/baskets/{basketId}", produces = "application/json")
     public Basket getBasketById(@PathVariable(value = "basketId") Long basketId) {
         Optional<Basket> basket = basketService.findById(basketId);
         if(!basket.isPresent()) {
