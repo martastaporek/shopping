@@ -17,6 +17,8 @@ Thanks to Hibernate framework Code-First approach was used to manage the entitie
 For each resource there are implemented basic HTTP request method: get, post, put and delete. Those methods except the delete use JSON files.  
   
 ## Screenshot  
+
+Example customer data.
   
 ![Screenshot](shop.png)  
   
