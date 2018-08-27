@@ -13,7 +13,8 @@ Rest API for online shop.
 Thanks to Hibernate framework Code-First approach was used to manage the entities and relationships between them. There are 3 types of the resources:  
 - customers,  
 - products,  
-- baskets.  
+- baskets. 
+ 
 For each resource there are implemented basic HTTP request method: get, post, put and delete. Those methods except the delete use JSON files.  
   
 ## Screenshot  
